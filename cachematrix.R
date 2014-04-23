@@ -1,8 +1,8 @@
-## Put comments here that give an overall description of what your
-## functions do
+## These two functions work together to calculate and cache a matrix's inverse. 
 
-## Write a short comment describing this function
-z <- matrix(2:5, 2, 2)
+## makeCacheMatrix is a function that turns a normal matrix into an object-like matrix with four functions: set, get, setInverse, getInverse. Get
+## returns the original matrix, set allows you to rerun the function on a different matrix, and setInverse and getInverse calculate and 
+## return the inverted matrix respectively
 
 makeCacheMatrix <- function(x = matrix()) {
 ##This function creates a special "matrix" object that can cache its inverse.
@@ -20,11 +20,11 @@ makeCacheMatrix <- function(x = matrix()) {
 
 }
 
-## Write a short comment describing this function
+## cacheSolve is a function that takes the new type of matrix created by makeCacheMatrix and calls the matrix's getInverse to see if the 
+## inverse of the matrix has already been calculated and cached. If it is in the cache, cacheSolve prints the value. If it hasn't been cached, 
+## cacheSolve calculates the inverse of the matrix itself and puts it in the cache. 
 
 cacheSolve <- function(x, ...) {
-     ## Return a matrix that is the inverse of 'x'
-     ##From the README: This function computes the inverse of the special "matrix" returned by `makeCacheMatrix` above. If the inverse has already been calculated (and the matrix has not changed), then the `cachesolve` should retrieve the inverse from the cache.
      n <<- x$getInverse()
      if(!is.null(n)) {
           message("This was already cached!")
@@ -37,31 +37,3 @@ cacheSolve <- function(x, ...) {
           return(n)
      }
 }
-
-
-##Example code from README for reference
-# makeVector <- function(x = numeric()) {
-#      m <- NULL
-#      set <- function(y) {
-#           x <<- y
-#           m <<- NULL
-#      }
-#      get <- function() x
-#      setmean <- function(mean) m <<- mean
-#      getmean <- function() m
-#      list(set = set, get = get,
-#           setmean = setmean,
-#           getmean = getmean)
-# }
-# 
-# cachemean <- function(x, ...) {
-#      m <- x$getmean()
-#      if(!is.null(m)) {
-#           message("getting cached data")
-#           return(m)
-#      }
-#      data <- x$get()
-#      m <- mean(data, ...)
-#      x$setmean(m)
-#      m
-# }
